@@ -1,4 +1,4 @@
-package org.patterns.patternplaygroundfx.world.Factory;
+package org.patterns.patternplaygroundfx.world;
 
 import java.util.HashMap;
 import java.util.Map;
