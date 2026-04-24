@@ -2,14 +2,20 @@ package org.patterns.patternplaygroundfx.world.models.maps;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import org.patterns.patternplaygroundfx.prototype.enemies.EnemyList;
+import org.patterns.patternplaygroundfx.prototype.enemies.EnemyPrototype;
 import org.patterns.patternplaygroundfx.world.Factory.ConcretFactories.Map;
 import org.patterns.patternplaygroundfx.world.WorldMap;
 import org.patterns.patternplaygroundfx.world.flyweight.MapType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeMap implements Map {
     private final int width = 36;
     private final int height = 36;
     private MapType[][] matrix_map =  new MapType[width][height];
+    private List<EnemyPrototype> enemies = new ArrayList<>();
 
     @Override
     public void Generate_floor() {
@@ -25,17 +31,24 @@ public class HomeMap implements Map {
 
     @Override
     public void drawObject(GraphicsContext gc, int size) {
+        int tileSize = Math.max(1, size);
 
-        for(int x = 0; x < size; x++){
-            for(int y = 0; y < size; y++){
+        for(int x = 0; x < width; x++){
+            for(int y = 0; y < height; y++){
                 if(matrix_map[x][y] != null){
-                    matrix_map[x][y].draw(gc,x,y,size);
+                    matrix_map[x][y].draw(gc,x,y,tileSize);
                 }
 
             }
         }
+        for(EnemyPrototype e: enemies){
+            e.render(gc,tileSize);
+
+        }
 
     }
+
+
 
     @Override
     public void setstate() {

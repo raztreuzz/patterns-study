@@ -1,7 +1,10 @@
 package org.patterns.patternplaygroundfx.registry.Level;
 
+import org.patterns.patternplaygroundfx.prototype.enemies.EnemyPrototype;
 import org.patterns.patternplaygroundfx.world.Factory.ConcretFactories.Map;
-import org.patterns.patternplaygroundfx.world.WorldMap;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LevelContext {
 
@@ -11,8 +14,12 @@ public class LevelContext {
     private Boolean FinalBoss;
     private String title;
     private Map map;
+    private  List<EnemyPrototype> enemies = new ArrayList<>();
+    private List<EnemyPrototype> npc = new ArrayList<>();
 
-    protected LevelContext() {
+
+
+    public LevelContext(){
 
     }
 
@@ -36,6 +43,22 @@ public class LevelContext {
         this.map = map;
     }
 
+    public void addEnemy(EnemyPrototype enemy) {
+        this.enemies.add(enemy);
+    }
+
+    public List<EnemyPrototype> getEnemies() {
+        return enemies;
+    }
+
+    public void addnpc(EnemyPrototype npc) {
+        this.npc.add(npc);
+    }
+
+    public List<EnemyPrototype> getNpc() {
+        return npc;
+    }
+
     public Map getMap() {
         return map;
     }
@@ -43,6 +66,7 @@ public class LevelContext {
     public String getTitle() {
         return title;
     }
+
 
     @Override
     public String toString() {

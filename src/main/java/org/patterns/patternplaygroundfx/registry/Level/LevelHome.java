@@ -1,5 +1,6 @@
 package org.patterns.patternplaygroundfx.registry.Level;
 
+import org.patterns.patternplaygroundfx.prototype.enemies.EnemyPrototype;
 import org.patterns.patternplaygroundfx.registry.Interface.Builder;
 import org.patterns.patternplaygroundfx.world.Factory.ConcretFactories.Map;
 import org.patterns.patternplaygroundfx.world.WorldMap;
@@ -7,6 +8,7 @@ import org.patterns.patternplaygroundfx.world.WorldMap;
 public class LevelHome implements Builder {
 
     private LevelContext context;
+
 
     @Override
     public Builder reset() {
@@ -43,6 +45,25 @@ public class LevelHome implements Builder {
         WorldMap factory = new WorldMap();
         Map generatedmap = factory.generate_map();
         context.setMap(generatedmap);
+
+        for (int i = 0; i < 5; i++) {
+            EnemyPrototype zombie = factory.generateEnemy();
+            if (zombie == null) {
+                continue;
+            }
+            zombie.Location(i * 5, 10);
+            context.addEnemy(zombie);
+
+        }
+
+        for (int i = 0; i < 7; i++) {
+            EnemyPrototype npc = factory.generatenpc();
+
+            if (npc != null) {
+                npc.Location(i * 5, 5);
+                context.addnpc(npc);
+            }
+        }
 
         return this;
     }
